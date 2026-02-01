@@ -1,0 +1,957 @@
+/* ============================================ */
+/* ФАЙЛ: style.css - ПОЛНОСТЬЮ КАСТОМНЫЙ ИНТЕРФЕЙС */
+/* ============================================ */
+
+/* Сброс ВСЕХ стилей и кастомные элементы */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+    outline: none;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+/* Кастомные шрифты */
+@font-face {
+    font-family: 'CustomUI';
+    src: local('SF Pro Text'), local('Segoe UI'), local('Roboto'), sans-serif;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'CustomUI';
+    src: local('SF Pro Text Medium'), local('Segoe UI Semibold'), local('Roboto Medium'), sans-serif;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'CustomUI';
+    src: local('SF Pro Display'), local('Segoe UI Bold'), local('Roboto Bold'), sans-serif;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'CustomMono';
+    src: local('SF Mono'), local('Cascadia Code'), local('Consolas'), monospace;
+}
+
+/* Базовые переменные */
+:root {
+    /* Цвета - минималистичная палитра */
+    --ui-bg: #0F1116;
+    --ui-surface: #1A1D24;
+    --ui-surface-hover: #222630;
+    --ui-surface-active: #2A2F3C;
+    --ui-border: #2D3440;
+    --ui-border-light: #3A4250;
+    --ui-text-primary: #E4E7EB;
+    --ui-text-secondary: #8B95A6;
+    --ui-text-tertiary: #5A6478;
+    --ui-accent: #6366F1;
+    --ui-accent-hover: #8183F4;
+    --ui-accent-active: #4F46E5;
+    --ui-success: #10B981;
+    --ui-warning: #F59E0B;
+    --ui-error: #EF4444;
+    
+    /* Размеры */
+    --header-height: 40px;
+    --nav-height: 32px;
+    --row-height: 26px;
+    --role-row-height: 22px;
+    --cell-padding: 2px;
+    --border-radius-sm: 3px;
+    --border-radius: 4px;
+}
+
+/* Базовые стили */
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'CustomUI', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 1.2;
+    color: var(--ui-text-primary);
+    background: var(--ui-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Убираем все браузерные скроллбары */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--ui-border);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ui-border-light);
+}
+
+/* Контейнер приложения */
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* ============================================ */
+/* ШАПКА - УЛЬТРАКОМПАКТНАЯ */
+/* ============================================ */
+
+.header {
+    height: var(--header-height);
+    min-height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    background: var(--ui-surface);
+    border-bottom: 1px solid var(--ui-border);
+    flex-shrink: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ui-accent);
+    font-family: 'CustomMono', monospace;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.logo h1 {
+    font-family: 'CustomUI', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--ui-text-primary);
+    letter-spacing: 0.3px;
+}
+
+.subtitle {
+    font-size: 9px;
+    color: var(--ui-text-tertiary);
+    margin-left: 8px;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: var(--border-radius-sm);
+    font-size: 9px;
+    color: var(--ui-success);
+}
+
+.status-dot {
+    width: 5px;
+    height: 5px;
+    background: currentColor;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ============================================ */
+/* НАВИГАЦИЯ - ТОЛЬКО ИКОНКИ */
+/* ============================================ */
+
+.main-nav {
+    height: var(--nav-height);
+    min-height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    background: var(--ui-surface);
+    border-bottom: 1px solid var(--ui-border);
+    gap: 0;
+    flex-shrink: 0;
+}
+
+.nav-btn {
+    width: 28px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ui-text-tertiary);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    position: relative;
+    font-size: 13px;
+}
+
+.nav-btn:hover {
+    color: var(--ui-text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn.active {
+    color: var(--ui-text-primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 6px;
+    right: 6px;
+    height: 2px;
+    background: var(--ui-accent);
+    border-radius: 1px;
+}
+
+/* ============================================ */
+/* ОСНОВНОЕ ОКНО */
+/* ============================================ */
+
+.workspace {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--ui-bg);
+}
+
+.view {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.view.active {
+    display: flex;
+}
+
+/* Шапка вида */
+.view-header {
+    height: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    background: var(--ui-surface);
+    border-bottom: 1px solid var(--ui-border);
+    flex-shrink: 0;
+}
+
+.view-title {
+    font-weight: 500;
+    font-size: 11px;
+    color: var(--ui-text-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.view-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ============================================ */
+/* КАСТОМНЫЕ КНОПКИ */
+/* ============================================ */
+
+/* Базовый стиль кнопки */
+.btn {
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--border-radius-sm);
+    color: var(--ui-text-secondary);
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background: var(--ui-surface-hover);
+    border-color: var(--ui-border-light);
+    color: var(--ui-text-primary);
+}
+
+.btn:active {
+    background: var(--ui-surface-active);
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: var(--ui-accent);
+    border-color: var(--ui-accent);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--ui-accent-hover);
+    border-color: var(--ui-accent-hover);
+}
+
+.btn-primary:active {
+    background: var(--ui-accent-active);
+}
+
+.btn-icon {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--ui-text-tertiary);
+    font-size: 12px;
+}
+
+.btn-icon:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--ui-text-secondary);
+}
+
+/* ============================================ */
+/* ПАНЕЛЬ УПРАВЛЕНИЯ ГАНТОМ */
+/* ============================================ */
+
+.gantt-controls {
+    height: 32px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    background: var(--ui-surface);
+    border-bottom: 1px solid var(--ui-border);
+    flex-shrink: 0;
+}
+
+.view-controls {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    background: var(--ui-bg);
+    border-radius: var(--border-radius-sm);
+    padding: 2px;
+}
+
+.view-btn {
+    height: 20px;
+    padding: 0 8px;
+    background: transparent;
+    border: none;
+    border-radius: 2px;
+    color: var(--ui-text-tertiary);
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-width: 50px;
+    text-align: center;
+}
+
+.view-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--ui-text-secondary);
+}
+
+.view-btn.active {
+    background: var(--ui-surface);
+    color: var(--ui-text-primary);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.date-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.date-range {
+    font-size: 10px;
+    color: var(--ui-text-secondary);
+    min-width: 160px;
+    text-align: center;
+}
+
+/* ============================================ */
+/* КОНТЕЙНЕР ГАНТА - ЗАНИМАЕТ ВСЮ ШИРИНУ */
+/* ============================================ */
+
+.gantt-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--ui-surface);
+    margin: 0;
+}
+
+#gantt-chart {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* ============================================ */
+/* КАСТОМНЫЙ ГАНТ - БЕЗ ГОРИЗОНТАЛЬНОГО СКРОЛЛА */
+/* ============================================ */
+
+.custom-gantt {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Контейнер для прокрутки */
+.gantt-scroll-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Заголовок Ганта */
+.gantt-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ui-surface);
+    border-bottom: 1px solid var(--ui-border);
+    flex-shrink: 0;
+}
+
+.header-row {
+    display: flex;
+    height: 24px;
+}
+
+/* Колонка с названием сделки */
+.header-cell.deal-col {
+    width: 180px;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    color: var(--ui-text-tertiary);
+    font-size: 9px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--ui-bg);
+    border-right: 1px solid var(--ui-border);
+    user-select: none;
+}
+
+/* Ячейки дней в заголовке */
+.header-cell {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--ui-border);
+    background: var(--ui-surface);
+    color: var(--ui-text-secondary);
+    font-size: 9px;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Сегодняшний день */
+.header-cell.today {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--ui-accent);
+}
+
+.header-cell.today::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    background: var(--ui-accent);
+    border-radius: 50%;
+}
+
+/* Выходные */
+.header-cell.weekend {
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--ui-text-tertiary);
+}
+
+/* Подпись дня */
+.day-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    z-index: 1;
+}
+
+.day-name {
+    font-size: 8px;
+    opacity: 0.7;
+}
+
+.day-number {
+    font-size: 10px;
+    font-weight: 500;
+}
+
+/* Месяц в заголовке (для компактных режимов) */
+.month-header {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 8px;
+    color: var(--ui-text-tertiary);
+    z-index: 0;
+}
+
+/* Тело Ганта */
+.gantt-body {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--ui-bg);
+    position: relative;
+}
+
+/* ============================================ */
+/* СТРОКИ - УЛЬТРАКОМПАКТНЫЕ */
+/* ============================================ */
+
+/* Строка заявки */
+.deal-row {
+    display: flex;
+    height: var(--row-height);
+    min-height: var(--row-height);
+    background: var(--ui-surface);
+    border-bottom: 1px solid var(--ui-border);
+    transition: background 0.15s ease;
+}
+
+.deal-row:hover {
+    background: var(--ui-surface-hover);
+}
+
+/* Ячейка с информацией о заявке */
+.deal-cell {
+    width: 180px;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    border-right: 1px solid var(--ui-border);
+    background: var(--ui-bg);
+}
+
+/* Информация о заявке в ОДНУ ЛИНИЮ */
+.deal-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    height: 100%;
+}
+
+.deal-code {
+    font-family: 'CustomMono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--ui-text-primary);
+    min-width: 65px;
+    white-space: nowrap;
+}
+
+.deal-applicant {
+    font-size: 10px;
+    color: var(--ui-text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Кнопка раскрытия - минималистичная */
+.expand-btn {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--ui-border);
+    border-radius: 2px;
+    color: var(--ui-text-tertiary);
+    font-size: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+
+.expand-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--ui-border-light);
+    color: var(--ui-text-secondary);
+}
+
+/* Ячейки дней */
+.day-cell {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--ui-border);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Сегменты этапов */
+.stage-segment {
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.stage-segment:hover {
+    filter: brightness(1.2);
+    transform: translateY(-50%) scaleY(1.05);
+}
+
+/* ============================================ */
+/* СТРОКИ РОЛЕЙ - СУПЕРКОМПАКТНЫЕ */
+/* ============================================ */
+
+.role-rows {
+    display: none;
+}
+
+.role-row {
+    display: flex;
+    height: var(--role-row-height);
+    min-height: var(--role-row-height);
+    background: var(--ui-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: background 0.15s ease;
+}
+
+.role-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Ячейка с именем роли */
+.role-cell {
+    width: 180px;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    border-right: 1px solid var(--ui-border);
+}
+
+.role-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    height: 100%;
+}
+
+.role-color {
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+    flex-shrink: 0;
+}
+
+.role-text {
+    font-size: 9px;
+    color: var(--ui-text-tertiary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Задачи */
+.task-block {
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.task-block:hover {
+    filter: brightness(1.2);
+    transform: translateY(-50%) scaleY(1.1);
+    z-index: 10;
+}
+
+/* ============================================ */
+/* КАСТОМНЫЕ ТУЛТИПЫ */
+/* ============================================ */
+
+.tooltip {
+    position: absolute;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--border-radius-sm);
+    padding: 6px 8px;
+    font-size: 10px;
+    color: var(--ui-text-primary);
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: tooltipFade 0.15s ease;
+}
+
+@keyframes tooltipFade {
+    from {
+        opacity: 0;
+        transform: translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================ */
+/* СТАТУС БАР - МИНИМАЛИСТИЧНЫЙ */
+/* ============================================ */
+
+.status-bar {
+    height: 24px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    background: var(--ui-surface);
+    border-top: 1px solid var(--ui-border);
+    font-size: 9px;
+    color: var(--ui-text-tertiary);
+    flex-shrink: 0;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.count {
+    font-weight: 500;
+    color: var(--ui-text-secondary);
+}
+
+/* ============================================ */
+/* КАСТОМНЫЕ ИНПУТЫ И ВЫБОРЫ */
+/* ============================================ */
+
+.custom-input {
+    height: 24px;
+    padding: 0 8px;
+    background: var(--ui-bg);
+    border: 1px solid var(--ui-border);
+    border-radius: var(--border-radius-sm);
+    color: var(--ui-text-primary);
+    font-size: 10px;
+    font-family: 'CustomUI', sans-serif;
+    transition: all 0.15s ease;
+}
+
+.custom-input:focus {
+    border-color: var(--ui-accent);
+    background: var(--ui-surface);
+}
+
+.custom-select {
+    height: 24px;
+    padding: 0 24px 0 8px;
+    background: var(--ui-bg) url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 5L6 8L9 5' stroke='%238B95A6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 8px center;
+    border: 1px solid var(--ui-border);
+    border-radius: var(--border-radius-sm);
+    color: var(--ui-text-primary);
+    font-size: 10px;
+    font-family: 'CustomUI', sans-serif;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.custom-select:hover {
+    border-color: var(--ui-border-light);
+}
+
+.custom-select:focus {
+    border-color: var(--ui-accent);
+    background: var(--ui-surface);
+}
+
+/* ============================================ */
+/* УТИЛИТЫ */
+/* ============================================ */
+
+.hidden {
+    display: none !important;
+}
+
+.divider {
+    width: 1px;
+    height: 12px;
+    background: var(--ui-border);
+    margin: 0 4px;
+}
+
+/* Анимация появления */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in {
+    animation: slideIn 0.2s ease;
+}
+
+/* Ховер-эффекты */
+.hover-lift:hover {
+    transform: translateY(-1px);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/* Текст */
+.text-primary {
+    color: var(--ui-text-primary);
+}
+
+.text-secondary {
+    color: var(--ui-text-secondary);
+}
+
+.text-tertiary {
+    color: var(--ui-text-tertiary);
+}
+
+.text-accent {
+    color: var(--ui-accent);
+}
+
+/* Фоны */
+.bg-surface {
+    background: var(--ui-surface);
+}
+
+.bg-surface-hover {
+    background: var(--ui-surface-hover);
+}
+
+.bg-surface-active {
+    background: var(--ui-surface-active);
+}
+
+/* Отступы */
+.p-0 { padding: 0; }
+.p-1 { padding: 4px; }
+.p-2 { padding: 8px; }
+
+.m-0 { margin: 0; }
+.m-1 { margin: 4px; }
+.m-2 { margin: 8px; }
+
+/* Flex */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+
+/* Ширины */
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.min-w-0 { min-width: 0; }
+
+/* Скрытие текста */
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

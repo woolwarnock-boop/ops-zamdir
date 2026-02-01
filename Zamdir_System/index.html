@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Замдир | Координационный центр</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Frappe Gantt CSS (CDN) -->
+</head>
+<body>
+    <div class="app">
+        <!-- Шапка -->
+	<header class="header">
+    		<div class="logo">
+        	<div class="logo-icon">Z</div>
+        	<div>
+            		<h1>Замдир</h1>
+            	<div class="subtitle">Координационный центр v0.1.0</div>
+        	</div>
+    	</div>
+    	<div class="status-indicator">
+        	<div class="status-dot"></div>
+        	<span>Локальный режим</span>
+    	</div>
+	</header>
+
+        <!-- Основная навигация -->
+	<nav class="main-nav">
+    		<button class="nav-btn active" data-view="gantt" title="Гант">📅</button>
+    		<button class="nav-btn" data-view="templates" title="Шаблоны">📋</button>
+    		<button class="nav-btn" data-view="tasks" title="Задачи">✓</button>
+    		<button class="nav-btn" data-view="settings" title="Настройки">⚙</button>
+	</nav>
+
+        <!-- Основное рабочее пространство -->
+        <main class="workspace">
+            <!-- Вид: Сводный Гант (активен по умолчанию) -->
+            <div id="view-gantt" class="view active">
+                <div class="view-header">
+                    <h2>Сводный Гант</h2>
+                    <div class="view-actions">
+                        <button id="btn-new-deal" class="btn btn-primary">
+                            <span class="btn-icon">+</span> Новая заявка
+                        </button>
+                        <button id="btn-zoom-in" class="btn btn-icon" title="Увеличить">🔍</button>
+                        <button id="btn-zoom-out" class="btn btn-icon" title="Уменьшить">🔎</button>
+                    </div>
+                </div>
+                <div class="gantt-container">
+                    <div id="gantt-chart"></div>
+                </div>
+            </div>
+
+            <!-- Вид: Шаблоны (скрыт) -->
+            <div id="view-templates" class="view">
+                <div class="view-header">
+                    <h2>Шаблоны</h2>
+                    <button id="btn-new-template" class="btn btn-primary">+ Новый шаблон</button>
+                </div>
+                <div id="templates-list" class="cards-container">
+                    <div class="empty-state">
+                        <p>Шаблонов пока нет. Создайте первый.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вид: Задачи (скрыт) -->
+            <div id="view-tasks" class="view">
+                <div class="view-header">
+                    <h2>Задачи</h2>
+                    <div class="period-selector">
+                        <button class="period-btn active" data-period="today">Сегодня</button>
+                        <button class="period-btn" data-period="tomorrow">Завтра</button>
+                        <button class="period-btn" data-period="this-week">На этой неделе</button>
+                        <button class="period-btn" data-period="next-week">Через неделю</button>
+                    </div>
+                </div>
+                <div id="tasks-list">
+                    <div class="empty-state">
+                        <p>Задач пока нет.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вид: Настройки (скрыт) -->
+            <div id="view-settings" class="view">
+                <div class="view-header">
+                    <h2>Настройки</h2>
+                </div>
+                <div class="settings-panel">
+                    <div class="empty-state">
+                        <p>Настройки появятся позже.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Статус-бар -->
+	<footer class="status-bar">
+    		<div class="status-item">
+        		<span id="db-status">Загрузка...</span>
+    		</div>
+    		<div class="status-item">
+        		<span>Заявок: <span id="deals-count" class="count">0</span></span>
+        		<div class="divider"></div>
+        		<span>Задач: <span id="tasks-count" class="count">0</span></span>
+    		</div>
+	</footer>
+    </div>
+
+    <!-- Dexie.js (IndexedDB) -->
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.min.js"></script>
+    <!-- Frappe Gantt JS -->
+    
+    <!-- Наши скрипты (ВАЖНО: в таком порядке) -->
+    <script src="js/db.js"></script>
+    <script src="js/gantt.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- Инициализация -->
+    <script>
+        // Проверка загрузки библиотек
+        console.log('Проверка библиотек:', {
+            Dexie: typeof Dexie,
+            Gantt: typeof Gantt
+        });
+    </script>
+</body>
+</html>
